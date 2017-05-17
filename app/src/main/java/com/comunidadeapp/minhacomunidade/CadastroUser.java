@@ -80,7 +80,7 @@ public class CadastroUser extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(CadastroUser.this, "Erro ao Cadastrar",
+                            Toast.makeText(CadastroUser.this, "Erro ao Cadastrarteste",
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
