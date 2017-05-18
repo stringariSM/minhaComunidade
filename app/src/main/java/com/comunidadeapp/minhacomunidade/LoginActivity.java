@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        overridePendingTransition(R.anim.left_go_in, R.anim.left_go_out);
+
         Intent Mensagens = new Intent(this,ServicoMensagens.class);
         startService(Mensagens);
         mAuth = FirebaseAuth.getInstance();

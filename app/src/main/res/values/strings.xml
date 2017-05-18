@@ -12,4 +12,9 @@
     <string name="imagem_de_fundo">Imagem de fundo</string>
     <string name="minha_comunidade">Minha Comunidade</string>
     <string name="j_possui_uma_conta">Já possui uma conta?</string>
+    <string name="login_com_o_facebook">Login com o Facebook</string>
+    <string name="registro">Registro</string>
+    <string name="entrar">Entrar</string>
+    <string name="senha">Senha</string>
+    <string name="email">Email</string>
 </resources>
