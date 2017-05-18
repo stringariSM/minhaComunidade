@@ -59,6 +59,14 @@ public class CadastroUser extends AppCompatActivity {
             }
         };
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.left_back_in, R.anim.left_back_out);
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();
