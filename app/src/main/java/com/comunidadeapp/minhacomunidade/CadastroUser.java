@@ -30,12 +30,14 @@ public class CadastroUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_user);
+        overridePendingTransition(R.anim.left_go_in, R.anim.left_go_out);
+
         Intent Mensagens = new Intent(this,ServicoMensagens.class);
         startService(Mensagens);
         mAuth = FirebaseAuth.getInstance();
-        btnCriar = (Button) findViewById(R.id.button2);
-        edtEmail = (EditText) findViewById(R.id.editText4);
-        edtSenha = (EditText) findViewById(R.id.editText3);
+        btnCriar = (Button) findViewById(R.id.btnCadastrar);
+        edtEmail = (EditText) findViewById(R.id.editTextEmail);
+        edtSenha = (EditText) findViewById(R.id.editTextSenha);
         btnCriar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,4 +17,6 @@
     <string name="entrar">Entrar</string>
     <string name="senha">Senha</string>
     <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="criar_conta">Criar conta</string>
 </resources>
