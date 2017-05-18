@@ -7,4 +7,6 @@
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Login</string>
+    <string name="cadastre_se_com_e_mail">Cadastre-se com e-mail</string>
+    <string name="cadastre_se_com_o_facebook">Cadastre-se com o Facebook</string>
 </resources>
