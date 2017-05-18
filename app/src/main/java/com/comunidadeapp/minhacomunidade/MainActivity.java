@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, LoginActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(it);
             }
         });
