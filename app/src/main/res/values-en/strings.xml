@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minha Comunidade</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="cadastre_se_com_e_mail">Sing up with Email</string>
+    <string name="cadastre_se_com_o_facebook">Sing up with Facebook</string>
+    <string name="criar_conta">Create Account</string>
+    <string name="email">Email</string>
+    <string name="entrar">Login</string>
+    <string name="imagem_de_fundo">Background Image</string>
+    <string name="j_possui_uma_conta">Already registered?</string>
+    <string name="login">Login</string>
+    <string name="login_com_o_facebook">Login with Facebook</string>
+    <string name="minha_comunidade">Minha Comunidade</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="registro">Register</string>
+    <string name="senha">Password</string>
+    <string name="title_activity_login">Login</string>
+</resources>
