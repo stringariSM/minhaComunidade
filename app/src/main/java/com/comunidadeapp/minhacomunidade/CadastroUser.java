@@ -49,13 +49,10 @@ public class CadastroUser extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
-                    // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
     }
@@ -90,11 +87,12 @@ public class CadastroUser extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(CadastroUser.this, "Erro ao Cadastrarteste",
+                            Toast.makeText(CadastroUser.this, "Erro ao Cadastrar",
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            mAuth.sendPasswordResetEmail(email);
+                            Toast.makeText(CadastroUser.this, "Cadastro Efetuado com Sucesso",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
