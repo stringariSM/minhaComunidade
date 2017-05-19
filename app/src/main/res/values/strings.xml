@@ -19,4 +19,9 @@
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="criar_conta">Criar conta</string>
+    <string name="ajude_nos_a_contruir_uma_cidademelhor">Ajude-nos a contruir uma #cidademelhor</string>
+    <string name="fotografe_um_problema_ou_escolha_uma_foto_de_sua_galeria_e_seja_parte_da_mudan_a">Fotografe um problema ou escolha uma foto de sua galeria e seja parte da mudança</string>
+    <string name="c_mera">Câmera</string>
+    <string name="galeria_de_fotos">Galeria de Fotos</string>
+    <string name="pr_dios">Prédios</string>
 </resources>
