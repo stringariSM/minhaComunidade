@@ -19,4 +19,6 @@
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="criar_conta">Criar conta</string>
+    <string name="fb_app_id">359005441168224</string>
+
 </resources>
