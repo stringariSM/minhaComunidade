@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static com.comunidadeapp.minhacomunidade.R.id.LoginBtnLogin;
 
-public class LoginActivity extends AppCompatActivity {
+public class    LoginActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth;
     private EditText edtSenha;

@@ -1,14 +1,8 @@
 <resources>
     <string name="app_name">Minha Comunidade</string>
-    <string name="title_activity_login">Login</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Senha</string>
-    <string name="action_sign_in">Login</string>
-    <string name="action_sign_in_short">Login</string>
     <string name="cadastre_se_com_e_mail">Cadastre-se com e-mail</string>
-    <string name="cadastre_se_com_o_facebook">Cadastre-se com o Facebook</string>
     <string name="imagem_de_fundo">Imagem de fundo</string>
     <string name="minha_comunidade">Minha Comunidade</string>
     <string name="j_possui_uma_conta">Já possui uma conta?</string>
@@ -25,5 +19,7 @@
     <string name="galeria_de_fotos">Galeria de Fotos</string>
     <string name="pr_dios">Prédios</string>
     <string name="fb_app_id">359005441168224</string>
+    <string name="server_client_id">916737741161-h80lm90d9pt6dqpssbq1pji9ootg1m6o.apps.googleusercontent.com</string>
+
 
 </resources>

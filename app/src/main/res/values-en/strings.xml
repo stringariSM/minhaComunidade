@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Minha Comunidade</string>
-    <string name="action_sign_in">Login</string>
-    <string name="action_sign_in_short">Login</string>
     <string name="cadastre_se_com_e_mail">Sing up with Email</string>
-    <string name="cadastre_se_com_o_facebook">Sing up with Facebook</string>
     <string name="criar_conta">Create Account</string>
     <string name="email">Email</string>
     <string name="entrar">Login</string>
@@ -13,10 +10,13 @@
     <string name="login">Login</string>
     <string name="login_com_o_facebook">Login with Facebook</string>
     <string name="minha_comunidade">Minha Comunidade</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
     <string name="registro">Register</string>
     <string name="senha">Password</string>
-    <string name="title_activity_login">Login</string>
     <string name="fb_app_id">359005441168224</string>
+    <string name="server_client_id">916737741161-h80lm90d9pt6dqpssbq1pji9ootg1m6o.apps.googleusercontent.com</string>
+    <string name="ajude_nos_a_contruir_uma_cidademelhor">Ajude-nos a contruir uma #cidademelhor</string>
+    <string name="c_mera">Photo</string>
+    <string name="pr_dios">Prédios</string>
+    <string name="galeria_de_fotos">Galeria de Fotos</string>
+    <string name="fotografe_um_problema_ou_escolha_uma_foto_de_sua_galeria_e_seja_parte_da_mudan_a">Fotografe um problema ou escolha uma foto de sua galeria e seja parte da mudança</string>
 </resources>
