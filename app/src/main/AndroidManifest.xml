@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.comunidadeapp.minhacomunidade">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -12,17 +11,18 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_app_id" />
-        <activity android:name=".CadastroUser"></activity>
+
+        <activity android:name=".CadastroUser" />
 
         <service android:name=".ServicoMensagens">
             <intent-filter>
@@ -35,15 +35,17 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-
-
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".Principal"
+            android:label="@string/title_activity_principal" />
     </application>
 
 </manifest>

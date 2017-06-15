@@ -59,6 +59,8 @@ public class CadastroUser extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent Main = new Intent(CadastroUser.this,MainActivity.class);
+        startActivity(Main);
         finish();
         overridePendingTransition(R.anim.left_back_in, R.anim.left_back_out);
     }
@@ -91,8 +93,10 @@ public class CadastroUser extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(CadastroUser.this, "Cadastro Efetuado com Sucesso",
-                                    Toast.LENGTH_SHORT).show();
+                            Intent Principal = new Intent(CadastroUser.this,Principal.class);
+                            Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            startActivity(Principal);
+                            finish();
                         }
                     }
                 });
