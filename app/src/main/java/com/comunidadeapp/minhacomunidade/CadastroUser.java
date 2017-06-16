@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class CadastroUser extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class CadastroUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText edtSenha;
     private EditText edtEmail;
+    private EditText edtNome;
     private Button btnCriar;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -38,6 +41,7 @@ public class CadastroUser extends AppCompatActivity {
         btnCriar = (Button) findViewById(R.id.btnCadastrar);
         edtEmail = (EditText) findViewById(R.id.editTextEmail);
         edtSenha = (EditText) findViewById(R.id.editTextSenha);
+        edtNome = (EditText) findViewById(R.id.editTextNome);
         btnCriar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +97,12 @@ public class CadastroUser extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = database.getReference();
+                            FirebaseUser user = task.getResult().getUser();
+                            FirebaseUser user2 = mAuth.getCurrentUser();
+                            ref.child("Usuarios").child(user.getUid().toString()).child("Nome").setValue(edtNome.getText());
+                            ref.child("Usuarios").child(user.getUid().toString()).child("Email").setValue(mAuth.getCurrentUser().getEmail());
                             Intent Principal = new Intent(CadastroUser.this,Principal.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);

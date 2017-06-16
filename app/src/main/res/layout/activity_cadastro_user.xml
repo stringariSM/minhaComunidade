@@ -48,9 +48,22 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/titleColor"
+        android:layout_below="@+id/editTextNome"
+        android:layout_alignEnd="@+id/editTextSenha"
+        android:layout_alignStart="@+id/editTextSenha" />
+
+    <EditText
+        android:id="@+id/editTextNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="@string/nome"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/titleColor"
         android:layout_below="@+id/textView"
