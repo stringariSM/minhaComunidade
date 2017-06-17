@@ -97,7 +97,7 @@ public class    LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Intent Principal = new Intent(LoginActivity.this,Principal.class);
+                            Intent Principal = new Intent(LoginActivity.this,Drawer.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);
                             finish();

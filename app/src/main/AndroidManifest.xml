@@ -44,7 +44,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity
-            android:name=".Principal"
+            android:name=".Drawer"
             android:label="@string/title_activity_principal" />
     </application>
 

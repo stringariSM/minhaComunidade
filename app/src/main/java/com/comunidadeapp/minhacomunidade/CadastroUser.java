@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 public class CadastroUser extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
@@ -100,9 +98,10 @@ public class CadastroUser extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
+                            ref.child("Usuarios").child(user.getUid()).child("login").setValue("Email");
                             ref.child("Usuarios").child(user.getUid()).child("nome").setValue(edtNome.getText().toString());
                             ref.child("Usuarios").child(user.getUid()).child("email").setValue(user.getEmail());
-                            Intent Principal = new Intent(CadastroUser.this,Principal.class);
+                            Intent Principal = new Intent(CadastroUser.this,Drawer.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);
                             finish();
