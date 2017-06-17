@@ -22,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -123,10 +125,10 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
     }
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -140,7 +142,12 @@ public class MainActivity extends AppCompatActivity implements
                             //Erro no Login
                         }
                         else {
-                            //Login OK
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = database.getReference();
+                            ref.child("Usuarios").child(user.getUid()).child("nome").setValue(acct.getDisplayName());
+                            ref.child("Usuarios").child(user.getUid()).child("email").setValue(user.getEmail());
+                            ref.child("Usuarios").child(user.getUid()).child("foto").setValue(acct.getPhotoUrl().toString());
                         }
                     }
                 });
