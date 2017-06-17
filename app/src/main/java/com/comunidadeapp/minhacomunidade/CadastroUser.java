@@ -97,12 +97,11 @@ public class CadastroUser extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
+                            FirebaseUser user = task.getResult().getUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
-                            FirebaseUser user = task.getResult().getUser();
-                            FirebaseUser user2 = mAuth.getCurrentUser();
-                            ref.child("Usuarios").child(user.getUid().toString()).child("Nome").setValue(edtNome.getText());
-                            ref.child("Usuarios").child(user.getUid().toString()).child("Email").setValue(mAuth.getCurrentUser().getEmail());
+                            ref.child("Usuarios").child(user.getUid()).child("nome").setValue(edtNome.getText().toString());
+                            ref.child("Usuarios").child(user.getUid()).child("email").setValue(user.getEmail());
                             Intent Principal = new Intent(CadastroUser.this,Principal.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);
