@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.comunidadeapp.minhacomunidade.Entities.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -98,9 +99,7 @@ public class CadastroUser extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
-                            ref.child("Usuarios").child(user.getUid()).child("login").setValue("Email");
-                            ref.child("Usuarios").child(user.getUid()).child("nome").setValue(edtNome.getText().toString());
-                            ref.child("Usuarios").child(user.getUid()).child("email").setValue(user.getEmail());
+                            ref.child("Usuarios").child(user.getUid()).setValue(new Usuario(edtNome.getText().toString(),user.getEmail(),null,"Email"));
                             Intent Principal = new Intent(CadastroUser.this,Drawer.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);

@@ -5,7 +5,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.comunidadeapp.minhacomunidade.Auxiliares.ImageHelper;
+import com.comunidadeapp.minhacomunidade.Entities.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import static com.comunidadeapp.minhacomunidade.R.id.imageView;
 
 public class Drawer extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener{
@@ -34,6 +42,7 @@ public class Drawer extends AppCompatActivity implements
     private ImageView foto;
     private TextView username;
     private TextView email;
+    private Bitmap bmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,9 +84,29 @@ public class Drawer extends AppCompatActivity implements
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Usuario usuario = dataSnapshot.child(user.getUid()).getValue(Usuario.class);
+                final Usuario usuario = dataSnapshot.child(user.getUid()).getValue(Usuario.class);
                 username.setText(usuario.nome);
                 email.setText(usuario.email);
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        try {
+                            InputStream in = new URL(usuario.foto).openStream();
+                            bmp = BitmapFactory.decodeStream(in);
+                        } catch (Exception e) {
+                            // log error
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        if (bmp != null)
+                            foto.setImageBitmap(ImageHelper.CortaImg(bmp,360));
+                    }
+
+                }.execute();
             }
 
             @Override
@@ -173,6 +202,16 @@ public class Drawer extends AppCompatActivity implements
             fragmentManager.beginTransaction().replace(R.id.drawer_content, fragment).commit();
 
             setTitle(menuItem.getTitle());
+        }
+    }
+
+    public static Drawable CarregaFoto(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "Foto");
+            return d;
+        } catch (Exception e) {
+            return null;
         }
     }
 

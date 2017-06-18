@@ -4,13 +4,12 @@ package com.comunidadeapp.minhacomunidade;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
+import com.comunidadeapp.minhacomunidade.Entities.Usuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -150,12 +149,9 @@ public class MainActivity extends AppCompatActivity implements
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
-                            Usuario usuario = new Usuario(acct.getDisplayName(),user.getEmail(),acct.getPhotoUrl().toString());
+                            Usuario usuario = new Usuario(acct.getDisplayName(),user.getEmail(),acct.getPhotoUrl().toString(),"Google");
                             ref.child("Usuarios").child(user.getUid()).setValue(usuario);
-                            /*ref.child("Usuarios").child(user.getUid()).child("login").setValue("Google");
-                            ref.child("Usuarios").child(user.getUid()).child("nome").setValue(acct.getDisplayName());
-                            ref.child("Usuarios").child(user.getUid()).child("email").setValue(user.getEmail());
-                            ref.child("Usuarios").child(user.getUid()).child("foto").setValue(acct.getPhotoUrl().toString());*/
+
                         }
                     }
                 });
