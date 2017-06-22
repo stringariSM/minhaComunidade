@@ -9,7 +9,6 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
         android:contentDescription="@string/app_name"
         android:src="@drawable/city_background"
         android:scaleType="fitXY"/>
