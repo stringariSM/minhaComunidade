@@ -185,6 +185,10 @@ public class Drawer extends AppCompatActivity implements
                 fragment = new PrincipalFragment();
                 break;
 
+            case R.id.mnNovoApontamento:
+                fragment = new NovoApontamento();
+                break;
+
             case R.id.mnSair:
                 FirebaseAuth.getInstance().signOut();
                 Intent Login = new Intent(Drawer.this,MainActivity.class);

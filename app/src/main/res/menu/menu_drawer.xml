@@ -11,6 +11,12 @@
             android:title="Home"/>
 
         <item
+            android:id="@+id/mnNovoApontamento"
+            android:checked="true"
+            android:icon="@drawable/ic_home_24dp"
+            android:title="NovoApontamento"/>
+
+        <item
             android:id="@+id/mnSair"
             android:icon="@drawable/ic_sair_24dp"
             android:title="Sair"/>

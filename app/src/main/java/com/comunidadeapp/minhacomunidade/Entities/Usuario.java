@@ -10,7 +10,7 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(String nome,String email,String foto, String Tipo){
+    public Usuario(String nome,String email,String foto, String tipo){
         this.nome = nome;
         this.email = email;
         this.foto = foto;

@@ -1,0 +1,146 @@
+package com.comunidadeapp.minhacomunidade;
+
+
+import android.os.Bundle;
+import android.support.annotation.IntegerRes;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.app.Fragment;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.comunidadeapp.minhacomunidade.Entities.Apontamento;
+import com.comunidadeapp.minhacomunidade.Entities.TipoApontamento;
+import com.comunidadeapp.minhacomunidade.Entities.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Formatter;
+import java.util.List;
+
+public class NovoApontamento extends Fragment {
+
+    public NovoApontamento(){}
+
+    Spinner sp;
+    DatabaseReference dref;
+    Button btnSalvar;
+    EditText edtDescricao, edtData;
+    ArrayList<String> lstTipoApontamento = new ArrayList<>();
+    ArrayAdapter<String> adapterTipoApontamento;
+    int ID = 0;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_novo_apontamento, container, false);
+        sp = (Spinner) view.findViewById(R.id.spApontamentoTipo);
+        btnSalvar = (Button) view.findViewById(R.id.btnSalvaApontamento);
+        edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
+        edtData = (EditText) view.findViewById(R.id.edtApontamentoData);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SalvaNovoApontamento();
+            }
+        });
+        adapterTipoApontamento = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_spinner_dropdown_item,lstTipoApontamento);
+        sp.setAdapter(adapterTipoApontamento);
+
+        dref = FirebaseDatabase.getInstance().getReference();
+        Query lstApontamentos = dref.child("Tipo").orderByChild("Descricao");
+        lstApontamentos.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                TipoApontamento tipoApontamento = dataSnapshot.getValue(TipoApontamento.class);
+                lstTipoApontamento.add(tipoApontamento.Descricao);
+                adapterTipoApontamento.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                TipoApontamento tipoApontamento = dataSnapshot.getValue(TipoApontamento.class);
+                lstTipoApontamento.remove(tipoApontamento.Descricao);
+                adapterTipoApontamento.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        setupToolbar();
+        return view;
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+
+        final ActionBar bar = activity.getSupportActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+            bar.setShowHideAnimationEnabled(true);
+            bar.setHomeAsUpIndicator(R.drawable.ic_navigation_menu);
+        }
+    }
+    private void SalvaNovoApontamento(){
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        final Apontamento apontamento = new Apontamento();
+        apontamento.Descricao = edtDescricao.getText().toString();
+        try{
+            apontamento.Data = formatter.parse(edtData.getText().toString());
+        }
+        catch (java.text.ParseException e){
+            Toast toast = Toast.makeText(getView().getContext(),"Data Invalida", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        apontamento.ID = ID++;
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Usuarios");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final Usuario usuario = dataSnapshot.child(user.getUid()).getValue(Usuario.class);
+                apontamento.Responsavel = usuario;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+}
