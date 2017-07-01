@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.comunidadeapp.minhacomunidade.Entities.Apontamento;
 import com.comunidadeapp.minhacomunidade.Entities.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,13 +31,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class PrincipalFragment extends Fragment {
 
     DatabaseReference dref;
-    ArrayList<String> apontamentos = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<Apontamento> apontamentos = new ArrayList<>();
+    AdapterApontamentos adapter;
     ListView listview;
 
     public PrincipalFragment() {
@@ -47,15 +50,17 @@ public class PrincipalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
 
         listview = (ListView)  view.findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(view.getContext(),R.layout.item_list,R.id.Teste,apontamentos);
+        adapter = new AdapterApontamentos(view.getContext(),apontamentos);
         listview.setAdapter(adapter);
         dref = FirebaseDatabase.getInstance().getReference();
-        Query lstApontamentos = dref.child("Apontamentos").orderByChild("Data");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query lstApontamentos = dref.child("Apontamentos").orderByChild("Responsavel/Id").equalTo(user.getUid());
         lstApontamentos.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Apontamento apontamento = dataSnapshot.getValue(Apontamento.class);
-                apontamentos.add(apontamento.Descricao);
+                apontamentos.add(apontamento);
+                Collections.reverse(apontamentos);
                 adapter.notifyDataSetChanged();
             }
 

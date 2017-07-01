@@ -58,7 +58,21 @@ public class NovoApontamento extends Fragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SalvaNovoApontamento();
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("Usuarios");
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Usuario usuario = dataSnapshot.child(user.getUid()).getValue(Usuario.class);
+                        SalvaNovoApontamento(usuario);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
         adapterTipoApontamento = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_spinner_dropdown_item,lstTipoApontamento);
@@ -114,7 +128,7 @@ public class NovoApontamento extends Fragment {
             bar.setHomeAsUpIndicator(R.drawable.ic_navigation_menu);
         }
     }
-    private void SalvaNovoApontamento(){
+    private void SalvaNovoApontamento(Usuario user){
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         final Apontamento apontamento = new Apontamento();
         apontamento.Descricao = edtDescricao.getText().toString();
@@ -124,23 +138,11 @@ public class NovoApontamento extends Fragment {
         catch (java.text.ParseException e){
             Toast toast = Toast.makeText(getView().getContext(),"Data Invalida", Toast.LENGTH_SHORT);
             toast.show();
+            return;
         }
         apontamento.ID = ID++;
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Usuarios");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final Usuario usuario = dataSnapshot.child(user.getUid()).getValue(Usuario.class);
-                apontamento.Responsavel = usuario;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        apontamento.Responsavel = user;
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("Apontamentos").push().setValue(apontamento);
     }
 }

@@ -99,7 +99,7 @@ public class CadastroUser extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
-                            ref.child("Usuarios").child(user.getUid()).setValue(new Usuario(edtNome.getText().toString(),user.getEmail(),null,"Email"));
+                            ref.child("Usuarios").child(user.getUid()).setValue(new Usuario(user.getUid(),edtNome.getText().toString(),user.getEmail(),null,"Email"));
                             Intent Principal = new Intent(CadastroUser.this,Drawer.class);
                             Principal.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             startActivity(Principal);

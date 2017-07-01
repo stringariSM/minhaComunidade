@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements
                             FirebaseUser user = mAuth.getCurrentUser();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference ref = database.getReference();
-                            Usuario usuario = new Usuario(acct.getDisplayName(),user.getEmail(),acct.getPhotoUrl().toString(),"Google");
+                            Usuario usuario = new Usuario(user.getUid(),acct.getDisplayName(),user.getEmail(),acct.getPhotoUrl().toString(),"Google");
                             ref.child("Usuarios").child(user.getUid()).setValue(usuario);
 
                         }
