@@ -6,8 +6,8 @@
     tools:context="com.comunidadeapp.minhacomunidade.PrincipalFragment">
 
 
-
     <LinearLayout
+        android:id="@+id/viewA"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,9 +18,9 @@
             android:layout_height="100dp"
             android:adjustViewBounds="false"
             android:background="@color/white"
+            android:contentDescription="Minha Comunidade"
             android:paddingBottom="10dp"
-            app:srcCompat="@drawable/logo_text"
-            android:contentDescription="Minha Comunidade" />
+            app:srcCompat="@drawable/logo_text" />
 
         <TextView
             android:id="@+id/textView8"
@@ -46,5 +46,29 @@
             android:dividerHeight="20dp" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right">
+
+        <android.support.design.widget.FloatingActionButton
+            android:clickable="true"
+            android:id="@+id/btnAddImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:src="@android:color/transparent"
+            app:backgroundTint="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="+"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
 
 </FrameLayout>
