@@ -24,7 +24,7 @@
         android:text="@string/registro"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/titleColor"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -41,7 +41,7 @@
         android:ems="10"
         android:hint="@string/senha"
         android:inputType="textPassword"
-        android:textColor="#fff"
+        android:textColor="@color/white"
         android:textColorHint="@color/titleColor" />
 
     <EditText
@@ -54,6 +54,7 @@
         android:inputType="textEmailAddress"
         android:textColorHint="@color/titleColor"
         android:layout_below="@+id/editTextNome"
+        android:textColor="@color/white"
         android:layout_alignEnd="@+id/editTextSenha"
         android:layout_alignStart="@+id/editTextSenha" />
 
@@ -68,6 +69,7 @@
         android:textColorHint="@color/titleColor"
         android:layout_below="@+id/textView"
         android:layout_alignEnd="@+id/editTextSenha"
+        android:textColor="@color/white"
         android:layout_alignStart="@+id/editTextSenha" />
 
     <Button
