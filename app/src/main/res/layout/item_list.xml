@@ -25,9 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_weight="10.65"
+        android:alpha=".7"
+        android:background="@android:color/black"
+        android:contentDescription="Imagem da Denúncia"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/city_background_blur"
-        android:contentDescription="Imagem da Denúncia" />
+        app:srcCompat="@drawable/city_background_blur" />
 
     <TextView
         android:id="@+id/Teste2"
