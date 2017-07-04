@@ -1,29 +1,52 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.comunidadeapp.minhacomunidade.NovoApontamento">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_gradient"
+        tools:context="com.comunidadeapp.minhacomunidade.NovoApontamento">
 
-    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/edtApontamentoDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="228dp"
+        android:ems="10"
+        android:hint="qual o problema?"
+        android:inputType="text"
+        android:paddingBottom="20dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/titleColor"
+        android:textColorHint="@color/titleColor"
+        android:textSize="22sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:id="@+id/spApontamentoTipo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edtApontamentoDescricao"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="27dp"
+        android:entries="@array/spinnerItems"
+        android:textColor="@color/titleColor"/>
+
+    <!-- TODO: Update blank fragment layout
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descrição" />
 
-        <EditText
-            android:id="@+id/edtApontamentoDescricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="" />
 
         <TextView
             android:id="@+id/textView3"
@@ -55,5 +78,5 @@
             android:layout_height="wrap_content"
             android:text="Salvar" />
 
-    </LinearLayout>
-</FrameLayout>
+    </LinearLayout>-->
+</RelativeLayout>
