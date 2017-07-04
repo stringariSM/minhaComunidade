@@ -83,9 +83,13 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
 
             @Override
             protected void onPostExecute(Void result) {
+                Drawable padrao = foto.getDrawable();
                 if (bmp != null) {
-                    foto.setImageBitmap(ImageHelper.CortaImg(bmp, 360));
+                    foto.setImageBitmap(bmp);
                     foto.setAlpha((float) 1);
+                }
+                else{
+                    foto.setImageDrawable(padrao);
                 }
             }
         }.execute();
