@@ -57,7 +57,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         TextView Descricao = (TextView) rowView.findViewById(R.id.txtDescricao);
         TextView Usuario = (TextView) rowView.findViewById(R.id.txtUsuario);
         TextView Data = (TextView) rowView.findViewById(R.id.txtData);
-        ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
+        final ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
 
         // 4. Set the text for textView
         Descricao.setText(itemsArrayList.get(position).Descricao);
@@ -66,31 +66,29 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
             DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
             String sdt = df.format(itemsArrayList.get(position).Data);
             Data.setText(sdt);
-        }
-        else {
+        } else {
             Data.setText("");
         }
-        try {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        InputStream in = new URL(itemsArrayList.get(position).UrlFoto).openStream();
-                        bmp = BitmapFactory.decodeStream(in);
-                    } catch (Exception e) {
-                        // log error
-                    }
-                    return null;
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    InputStream in = new URL(itemsArrayList.get(position).UrlFoto).openStream();
+                    bmp = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    // log error
                 }
+                return null;
+            }
 
-            }.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        if (bmp != null)
-            foto.setImageBitmap(bmp);
+            @Override
+            protected void onPostExecute(Void result) {
+                if (bmp != null) {
+                    foto.setImageBitmap(ImageHelper.CortaImg(bmp, 360));
+                    foto.setAlpha((float) 1);
+                }
+            }
+        }.execute();
         // 5. retrn rowView
         return rowView;
     }
