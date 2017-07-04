@@ -36,7 +36,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="27dp"
-        android:entries="@array/spinnerItems"
         android:textColor="@color/titleColor"/>
 
     <!-- TODO: Update blank fragment layout
