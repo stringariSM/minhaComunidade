@@ -2,7 +2,10 @@ package com.comunidadeapp.minhacomunidade;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.comunidadeapp.minhacomunidade.Auxiliares.ImageHelper;
 import com.comunidadeapp.minhacomunidade.Entities.Apontamento;
 
 import java.io.InputStream;
@@ -18,6 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by egasp on 01/07/2017.
@@ -26,6 +31,8 @@ import java.util.Date;
 public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
     private final Context context;
     private final ArrayList<Apontamento> itemsArrayList;
+    private boolean retorna = false;
+    private Bitmap bmp;
 
     public AdapterApontamentos(Context context, ArrayList<Apontamento> itemsArrayList) {
 
@@ -36,7 +43,8 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
 
         // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
@@ -49,7 +57,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         TextView Descricao = (TextView) rowView.findViewById(R.id.txtDescricao);
         TextView Usuario = (TextView) rowView.findViewById(R.id.txtUsuario);
         TextView Data = (TextView) rowView.findViewById(R.id.txtData);
-        ImageView foto = (ImageView) rowView.findViewById(R.id.imageView4);
+        final ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
 
         // 4. Set the text for textView
         Descricao.setText(itemsArrayList.get(position).Descricao);
@@ -58,10 +66,33 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
             DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
             String sdt = df.format(itemsArrayList.get(position).Data);
             Data.setText(sdt);
-        }
-        else
+        } else {
             Data.setText("");
+        }
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    InputStream in = new URL(itemsArrayList.get(position).UrlFoto).openStream();
+                    bmp = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    // log error
+                }
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(Void result) {
+                Drawable padrao = foto.getDrawable();
+                if (bmp != null) {
+                    foto.setImageBitmap(bmp);
+                    foto.setAlpha((float) 1);
+                }
+                else{
+                    foto.setImageDrawable(padrao);
+                }
+            }
+        }.execute();
         // 5. retrn rowView
         return rowView;
     }
