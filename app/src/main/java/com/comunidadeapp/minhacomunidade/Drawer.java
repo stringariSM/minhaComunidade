@@ -50,9 +50,32 @@ public class Drawer extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
+
+
         initNavigationDrawer();
         initNavigationDrawerHeader();
         initDrawerListener(savedInstanceState);
+        String UrlFoto;
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                UrlFoto= null;
+            } else {
+                UrlFoto= extras.getString("URLFOTO");
+            }
+        } else {
+            UrlFoto= (String) savedInstanceState.getSerializable("URLFOTO");
+        }
+        if (UrlFoto!=null){
+            Fragment fragment;
+            fragment = new NovoApontamento();
+            Bundle args = new Bundle();
+            args.putString("URLFOTO", UrlFoto);
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.drawer_content, fragment).commit();
+        }
     }
 
     private void initNavigationDrawer()
@@ -186,7 +209,8 @@ public class Drawer extends AppCompatActivity implements
                 break;
 
             case R.id.mnNovoApontamento:
-                fragment = new NovoApontamento();
+                Intent SplashActvity = new Intent(Drawer.this,SplashActivity.class);
+                startActivity(SplashActvity);
                 break;
 
             case R.id.mnSair:

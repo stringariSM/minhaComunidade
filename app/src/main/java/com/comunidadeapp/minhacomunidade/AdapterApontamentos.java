@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,13 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         } else {
             Data.setText("");
         }
-       foto.setImageBitmap(itemsArrayList.get(position).Foto);
+        if(itemsArrayList.get(position).Foto != null){
+            foto.setImageBitmap(itemsArrayList.get(position).Foto);
+            foto.setAlpha((float) 1);
+        }
+        else{
+            foto.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.city_background_blur));
+        }
         // 5. retrn rowView
         return rowView;
     }

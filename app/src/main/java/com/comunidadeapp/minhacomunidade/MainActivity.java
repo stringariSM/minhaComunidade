@@ -1,6 +1,8 @@
 package com.comunidadeapp.minhacomunidade;
 
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
