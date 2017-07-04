@@ -1,6 +1,11 @@
 package com.comunidadeapp.minhacomunidade;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -41,6 +48,7 @@ public class PrincipalFragment extends Fragment {
     ArrayList<Apontamento> apontamentos = new ArrayList<>();
     AdapterApontamentos adapter;
     ListView listview;
+    private Bitmap bmp;
 
     public PrincipalFragment() {
 
@@ -53,7 +61,8 @@ public class PrincipalFragment extends Fragment {
         FloatingActionButton btnAddItem = (FloatingActionButton) view.findViewById(R.id.btnAddImage);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Intent novoApontamento = new Intent(getActivity(),SplashActivity.class);
+                startActivity(novoApontamento);
             }
         });
 
@@ -66,7 +75,27 @@ public class PrincipalFragment extends Fragment {
         lstApontamentos.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Apontamento apontamento = dataSnapshot.getValue(Apontamento.class);
+                final Apontamento apontamento = dataSnapshot.getValue(Apontamento.class);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        try {
+                            InputStream in = new URL(apontamento.UrlFoto).openStream();
+                            bmp = BitmapFactory.decodeStream(in);
+                        } catch (Exception e) {
+                            // log error
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        if (bmp != null) {
+                           apontamento.Foto = bmp;
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
                 apontamentos.add(apontamento);
                 Collections.reverse(apontamentos);
                 adapter.notifyDataSetChanged();

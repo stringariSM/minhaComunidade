@@ -57,7 +57,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         TextView Descricao = (TextView) rowView.findViewById(R.id.txtDescricao);
         TextView Usuario = (TextView) rowView.findViewById(R.id.txtUsuario);
         TextView Data = (TextView) rowView.findViewById(R.id.txtData);
-        final ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
+        ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
 
         // 4. Set the text for textView
         Descricao.setText(itemsArrayList.get(position).Descricao);
@@ -69,30 +69,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         } else {
             Data.setText("");
         }
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    InputStream in = new URL(itemsArrayList.get(position).UrlFoto).openStream();
-                    bmp = BitmapFactory.decodeStream(in);
-                } catch (Exception e) {
-                    // log error
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                Drawable padrao = foto.getDrawable();
-                if (bmp != null) {
-                    foto.setImageBitmap(bmp);
-                    foto.setAlpha((float) 1);
-                }
-                else{
-                    foto.setImageDrawable(padrao);
-                }
-            }
-        }.execute();
+       foto.setImageBitmap(itemsArrayList.get(position).Foto);
         // 5. retrn rowView
         return rowView;
     }
