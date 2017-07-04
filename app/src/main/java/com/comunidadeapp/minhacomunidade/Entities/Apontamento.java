@@ -1,5 +1,7 @@
 package com.comunidadeapp.minhacomunidade.Entities;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ public class Apontamento {
     public TipoApontamento Tipo;
     public Usuario Responsavel;
     public String UrlFoto;
+    public Bitmap Foto;
 
     public Apontamento(){}
 
