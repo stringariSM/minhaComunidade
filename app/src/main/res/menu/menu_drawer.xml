@@ -14,7 +14,7 @@
             android:id="@+id/mnNovoApontamento"
             android:checked="true"
             android:icon="@drawable/ic_home_24dp"
-            android:title="NovoApontamento"/>
+            android:title="Novo Apontamento"/>
 
         <item
             android:id="@+id/mnSair"

@@ -1,6 +1,7 @@
 package com.comunidadeapp.minhacomunidade;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +54,8 @@ public class PrincipalFragment extends Fragment {
         FloatingActionButton btnAddItem = (FloatingActionButton) view.findViewById(R.id.btnAddImage);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Intent novoApontamento = new Intent(getActivity(),SplashActivity.class);
+                startActivity(novoApontamento);
             }
         });
 
