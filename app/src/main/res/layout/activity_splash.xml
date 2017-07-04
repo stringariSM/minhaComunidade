@@ -31,11 +31,11 @@
         android:textAlignment="center"
         android:textColor="#FFF"
         android:textSize="18sp"
-        android:layout_above="@+id/btnBaterFoto"
+        android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/btnBaterFoto"
+        android:id="@+id/button2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_rounded"
@@ -66,13 +66,5 @@
         android:layout_alignParentStart="true"
         android:contentDescription="@string/pr_dios"
         app:srcCompat="@drawable/predios_white" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView5"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
