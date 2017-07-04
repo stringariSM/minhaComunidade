@@ -2,6 +2,7 @@ package com.comunidadeapp.minhacomunidade;
 
 
 import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntegerRes;
