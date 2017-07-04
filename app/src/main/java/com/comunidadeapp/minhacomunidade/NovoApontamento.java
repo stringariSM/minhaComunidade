@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -43,9 +44,10 @@ public class NovoApontamento extends Fragment {
     Spinner sp;
     DatabaseReference dref;
     Button btnSalvar;
-    EditText edtDescricao, edtData;
+    EditText edtDescricao;
     ArrayList<String> lstTipoApontamento = new ArrayList<>();
     ArrayAdapter<String> adapterTipoApontamento;
+    String UrlFoto;
     int ID = 0;
 
     @Override
@@ -54,7 +56,8 @@ public class NovoApontamento extends Fragment {
         sp = (Spinner) view.findViewById(R.id.spApontamentoTipo);
         btnSalvar = (Button) view.findViewById(R.id.btnSalvaApontamento);
         edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
-        edtData = (EditText) view.findViewById(R.id.edtApontamentoData);
+        Bundle args = getArguments();
+        UrlFoto  = args.getString("URLFOTO");
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,16 +135,10 @@ public class NovoApontamento extends Fragment {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         final Apontamento apontamento = new Apontamento();
         apontamento.Descricao = edtDescricao.getText().toString();
-        try{
-            apontamento.Data = formatter.parse(edtData.getText().toString());
-        }
-        catch (java.text.ParseException e){
-            Toast toast = Toast.makeText(getView().getContext(),"Data Invalida", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
+        apontamento.Data = Calendar.getInstance().getTime();
         apontamento.ID = ID++;
         apontamento.Responsavel = user;
+        apontamento.UrlFoto = UrlFoto;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("Apontamentos").push().setValue(apontamento);
     }
