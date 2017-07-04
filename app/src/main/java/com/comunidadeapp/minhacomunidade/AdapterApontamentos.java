@@ -39,8 +39,8 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         View rowView = inflater.inflate(R.layout.item_list, parent, false);
 
         // 3. Get the two text view from the rowView
-        TextView labelView = (TextView) rowView.findViewById(R.id.Teste);
-        TextView valueView = (TextView) rowView.findViewById(R.id.Teste2);
+        TextView labelView = (TextView) rowView.findViewById(R.id.txtDescricao);
+        TextView valueView = (TextView) rowView.findViewById(R.id.txtUsuario);
 
         // 4. Set the text for textView
         labelView.setText(itemsArrayList.get(position).Descricao);

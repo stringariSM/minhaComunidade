@@ -46,6 +46,7 @@ public class NovoApontamento extends Fragment {
     EditText edtDescricao, edtData;
     ArrayList<String> lstTipoApontamento = new ArrayList<>();
     ArrayAdapter<String> adapterTipoApontamento;
+    String UrlFoto;
     int ID = 0;
 
     @Override
@@ -55,6 +56,8 @@ public class NovoApontamento extends Fragment {
         btnSalvar = (Button) view.findViewById(R.id.btnSalvaApontamento);
         edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
         edtData = (EditText) view.findViewById(R.id.edtApontamentoData);
+        Bundle args = getArguments();
+        UrlFoto  = args.getString("URLFOTO");
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +145,7 @@ public class NovoApontamento extends Fragment {
         }
         apontamento.ID = ID++;
         apontamento.Responsavel = user;
+        apontamento.UrlFoto = UrlFoto;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("Apontamentos").push().setValue(apontamento);
     }

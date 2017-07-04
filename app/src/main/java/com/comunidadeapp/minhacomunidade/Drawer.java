@@ -53,6 +53,30 @@ public class Drawer extends AppCompatActivity implements
         initNavigationDrawer();
         initNavigationDrawerHeader();
         initDrawerListener(savedInstanceState);
+
+        String UrlFoto;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                UrlFoto= null;
+            }
+            else {
+                UrlFoto= extras.getString("URLFOTO");
+            }
+        }
+        else {
+            UrlFoto= (String) savedInstanceState.getSerializable("URLFOTO");
+        }
+        if(UrlFoto!=null){
+            Fragment fragment = null;
+            fragment = new NovoApontamento();
+            FragmentManager fragmentManager = getFragmentManager();
+            Bundle args = new Bundle();
+            args.putString("URLFOTO", UrlFoto);
+            fragment.setArguments(args);
+            fragmentManager.beginTransaction().replace(R.id.drawer_content, fragment).commit();
+            setTitle("NovoApontamento");
+        }
     }
 
     private void initNavigationDrawer()
@@ -186,7 +210,8 @@ public class Drawer extends AppCompatActivity implements
                 break;
 
             case R.id.mnNovoApontamento:
-                fragment = new NovoApontamento();
+                Intent novoApontamento = new Intent(Drawer.this,SplashActivity.class);
+                startActivity(novoApontamento);
                 break;
 
             case R.id.mnSair:
