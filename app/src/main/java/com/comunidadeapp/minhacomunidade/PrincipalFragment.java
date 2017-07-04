@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.support.design.widget.FloatingActionButton;
 
 import com.comunidadeapp.minhacomunidade.Entities.Apontamento;
 import com.comunidadeapp.minhacomunidade.Entities.Usuario;
@@ -48,6 +49,13 @@ public class PrincipalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
+
+        FloatingActionButton btnAddItem = (FloatingActionButton) view.findViewById(R.id.btnAddImage);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
 
         listview = (ListView)  view.findViewById(R.id.listview);
         adapter = new AdapterApontamentos(view.getContext(),apontamentos);
@@ -86,6 +94,8 @@ public class PrincipalFragment extends Fragment {
 
             }
         });
+
+
 
         setupToolbar();
         return view;
