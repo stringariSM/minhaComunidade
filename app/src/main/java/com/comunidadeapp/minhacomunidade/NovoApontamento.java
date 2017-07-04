@@ -1,8 +1,11 @@
 package com.comunidadeapp.minhacomunidade;
 
 
+import android.app.ActivityOptions;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntegerRes;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -53,6 +56,7 @@ public class NovoApontamento extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novo_apontamento, container, false);
+
         sp = (Spinner) view.findViewById(R.id.spApontamentoTipo);
         btnSalvar = (Button) view.findViewById(R.id.btnSalvaApontamento);
         edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
@@ -115,6 +119,7 @@ public class NovoApontamento extends Fragment {
         });
 
         setupToolbar();
+
         return view;
     }
 

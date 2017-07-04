@@ -40,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        overridePendingTransition(R.anim.left_go_in, R.anim.left_go_out);
+
         BaterFoto = (Button) findViewById(R.id.button2);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         carregando = (ProgressBar) findViewById(R.id.progressBar2);
@@ -133,5 +135,13 @@ public class SplashActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             EnviaFoto(photoFile.getPath());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent Main = new Intent(SplashActivity.this,MainActivity.class);
+        startActivity(Main);
+        finish();
+        overridePendingTransition(R.anim.left_back_in, R.anim.left_back_out);
     }
 }
