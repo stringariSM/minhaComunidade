@@ -95,7 +95,6 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         }
         else if(itemsArrayList.get(position).resolvido.equals("false") && itemsArrayList.get(position).Responsavel.Id.equals(uid)) {
         //else if(itemsArrayList.get(position).Responsavel.Id == uid) {
-            txtResolvido.setVisibility(View.GONE);
             btnResolver.setVisibility(View.VISIBLE);
             btnResolver.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,7 +103,6 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
                     Map<String,Object> taskMap = new HashMap<>();
                     taskMap.put("resolvido","true");
                     dref.child("Apontamentos").child(itemsArrayList.get(position).ID).updateChildren(taskMap);
-                    txtResolvido.setVisibility(View.VISIBLE);
                     btnResolver.setVisibility(View.GONE);
                     txtResolvido.setText("Resolvido");
                 }
