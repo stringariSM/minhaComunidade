@@ -10,21 +10,21 @@
         android:id="@+id/edtApontamentoDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:hint="qual o problema?"
         android:inputType="text"
+        android:maxLength="140"
         android:paddingBottom="20dp"
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/titleColor"
         android:textColorHint="@color/titleColor"
-        android:textSize="22sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:maxLength="140"/>
+        android:textSize="22sp" />
 
     <Spinner
         android:id="@+id/spApontamentoTipo"
@@ -38,22 +38,22 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="27dp"
         android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:theme="@android:style/Widget.TextView.SpinnerItem" />
+        android:theme="@android:style/Widget.TextView.SpinnerItem"
+        android:textColor="@drawable/spinner_style"/>
 
     <Button
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="67dp"
         android:id="@+id/btnSalvaApontamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="80dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_border"
         android:text="@string/salvar"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 
     <!-- TODO: Update blank fragment layout
     <LinearLayout
