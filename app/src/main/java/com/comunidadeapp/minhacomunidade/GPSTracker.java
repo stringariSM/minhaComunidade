@@ -156,13 +156,13 @@ public class GPSTracker extends Service implements LocationListener {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
-        alertDialog.setTitle("Configurações de GPS");
+        alertDialog.setTitle(R.string.titulo_alerta_configuracao);
 
         // Setting Dialog Message
-        alertDialog.setMessage("O GPS não está ativo. Deseja ir para o menu de configurações?");
+        alertDialog.setMessage(R.string.alerta_configuracao);
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(R.string.configuracoes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
@@ -170,7 +170,7 @@ public class GPSTracker extends Service implements LocationListener {
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }

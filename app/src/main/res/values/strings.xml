@@ -26,6 +26,10 @@
     <string name="publica_es">Publicações</string>
     <string name="salvar">Salvar</string>
     <string name="imagem_da_den_ncia">Imagem da Denúncia</string>
+    <string name="alerta_configuracao">O GPS não está ativo. Deseja ir para o menu de configurações?</string>
+    <string name="titulo_alerta_configuracao">Configurações de GPS</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="cancelar">Cancelar</string>
 
 
 </resources>
