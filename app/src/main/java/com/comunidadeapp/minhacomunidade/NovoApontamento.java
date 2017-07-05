@@ -2,6 +2,7 @@ package com.comunidadeapp.minhacomunidade;
 
 
 import android.app.ActivityOptions;
+import android.app.FragmentManager;
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Build;
@@ -156,6 +157,10 @@ public class NovoApontamento extends Fragment {
                 Map<String,Object> taskMap = new HashMap<>();
                 taskMap.put("ID",uniqueKey);
                 databaseReference.updateChildren(taskMap);
+                Fragment fragment = null;
+                fragment = new PrincipalFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.drawer_content, fragment).commit();
             }
         });
     }

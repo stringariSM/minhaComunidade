@@ -72,7 +72,7 @@ public class PrincipalFragment extends Fragment {
         listview.setAdapter(adapter);
         dref = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query lstApontamentos = dref.child("Apontamentos").orderByChild("Data");
+        Query lstApontamentos = dref.child("Apontamentos").orderByChild("Data/time");
         lstApontamentos.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
