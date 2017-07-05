@@ -1,7 +1,9 @@
 package com.comunidadeapp.minhacomunidade;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -35,7 +37,7 @@ import java.util.Date;
 
 public class SplashActivity extends AppCompatActivity {
 
-    Button BaterFoto;
+    Button BaterFoto, btnGaleria;
     ProgressBar carregando;
     private StorageReference mStorageRef;
     File photoFile;
@@ -46,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_go_in, R.anim.left_go_out);
 
         BaterFoto = (Button) findViewById(R.id.button2);
+        btnGaleria = (Button) findViewById(R.id.button3);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         carregando = (ProgressBar) findViewById(R.id.progressBar2);
         carregando.setVisibility(View.GONE);
@@ -53,6 +56,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
+            }
+        });
+        btnGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchGalleryIntent();
             }
         });
 
@@ -80,6 +89,13 @@ public class SplashActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
+    }
+    private int PICK_IMAGE_REQUEST = 2;
+
+    private void dispatchGalleryIntent() {
+        Intent takePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        takePictureIntent.setType("image/*");
+        startActivityForResult(takePictureIntent, PICK_IMAGE_REQUEST);
     }
 
     String mCurrentPhotoPath;
@@ -135,10 +151,39 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            Uri selectedImage = data.getData();
             BitmapFactory.Options option = new BitmapFactory.Options();
             option.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Bitmap photo =BitmapFactory.decodeFile(photoFile.getPath());
+            Bitmap photo = null;
+            try {
+                photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            photo = Bitmap.createScaledBitmap(photo, 1000, 1000, false);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+            File f = new File(storageDir+"/"+imageFileName+".jpg");
+            try {
+                f.createNewFile();
+                FileOutputStream fo = new FileOutputStream(f);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            EnviaFoto(storageDir+"/"+imageFileName+".jpg");
+        }
+        else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            BitmapFactory.Options option = new BitmapFactory.Options();
+            option.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            String Local = photoFile.getPath();
+            Bitmap photo =BitmapFactory.decodeFile(Local);
             photo = Bitmap.createScaledBitmap(photo, 1000, 1000, false);
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
@@ -161,5 +206,20 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(Main);
         finish();
         overridePendingTransition(R.anim.left_back_in, R.anim.left_back_out);
+    }
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 }
