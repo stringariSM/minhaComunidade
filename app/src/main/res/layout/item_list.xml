@@ -33,14 +33,12 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Resolvido"
-            android:visibility="gone"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
 
     </LinearLayout>
-
-
 
 
     <ImageView
@@ -62,7 +60,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dip"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="-70dp"
+        android:layout_marginTop="-75dp"
         android:layout_weight="1"
         android:alpha=".8"
         android:background="#AA000000"
@@ -74,11 +72,13 @@
 
     <TextView
         android:id="@+id/txtUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-20dp"
+        android:layout_marginTop="-10dp"
         android:layout_weight="1"
+        android:alpha=".8"
+        android:background="#AA000000"
+        android:paddingStart="10dp"
         android:text="TextView2"
         android:textColor="@color/white" />
 
