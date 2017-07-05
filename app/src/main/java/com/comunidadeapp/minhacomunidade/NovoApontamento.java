@@ -2,6 +2,7 @@ package com.comunidadeapp.minhacomunidade;
 
 
 import android.app.ActivityOptions;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntegerRes;
@@ -38,7 +39,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NovoApontamento extends Fragment {
 
@@ -141,10 +144,18 @@ public class NovoApontamento extends Fragment {
         final Apontamento apontamento = new Apontamento();
         apontamento.Descricao = edtDescricao.getText().toString();
         apontamento.Data = Calendar.getInstance().getTime();
-        apontamento.ID = ID++;
         apontamento.Responsavel = user;
         apontamento.UrlFoto = UrlFoto;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Apontamentos").push().setValue(apontamento);
+        ref.child("Apontamentos").push().setValue(apontamento, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError,
+                    DatabaseReference databaseReference) {
+                String uniqueKey = databaseReference.getKey();
+                Map<String,Object> taskMap = new HashMap<>();
+                taskMap.put("ID",uniqueKey);
+                databaseReference.updateChildren(taskMap);
+            }
+        });
     }
 }

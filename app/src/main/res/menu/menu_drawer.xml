@@ -17,6 +17,12 @@
             android:title="Novo Apontamento"/>
 
         <item
+            android:id="@+id/mnMeuApontamento"
+            android:checked="true"
+            android:icon="@drawable/ic_person_pin_black_24dp"
+            android:title="Meus Apontamentos"/>
+
+        <item
             android:id="@+id/mnSair"
             android:icon="@drawable/ic_sair_24dp"
             android:title="Sair"/>

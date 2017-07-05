@@ -9,13 +9,14 @@ import java.util.Date;
  */
 
 public class Apontamento {
-    public int ID;
+    public String ID;
     public String Descricao;
     public Date Data;
     public TipoApontamento Tipo;
     public Usuario Responsavel;
     public String UrlFoto;
     public Bitmap Foto;
+    public String resolvido = "false";
 
     public Apontamento(){}
 

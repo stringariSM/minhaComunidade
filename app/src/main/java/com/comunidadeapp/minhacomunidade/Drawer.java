@@ -206,6 +206,11 @@ public class Drawer extends AppCompatActivity implements
         {
             case R.id.mnPrincipal:
                 fragment = new PrincipalFragment();
+                setTitle("Home");
+                break;
+
+            case R.id.mnMeuApontamento:
+                fragment = new MeusApontamentosFragment();
                 break;
 
             case R.id.mnNovoApontamento:
