@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="50dp"
@@ -25,18 +26,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnResolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:text="Resolvido"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
     </LinearLayout>
 
 
@@ -45,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_weight="10.65"
-        android:alpha=".7"
+        android:alpha=".5"
         android:background="@android:color/black"
-        android:contentDescription="@string/imagem_da_den_ncia"
+        android:contentDescription="Imagem da Denúncia"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/city_background_blur" />
 
@@ -59,9 +48,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dip"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="-70dp"
         android:layout_weight="1"
-        android:alpha=".6"
+        android:alpha=".8"
         android:background="#AA000000"
         android:padding="12dip"
         android:text="Não Resolvido"
@@ -71,22 +60,43 @@
 
     <TextView
         android:id="@+id/txtUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-10dp"
         android:layout_weight="1"
+        android:alpha=".8"
+        android:background="#AA000000"
+        android:paddingStart="10dp"
         android:text="TextView2"
         android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/txtData"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/btnResolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:text="Resolvido"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+    </GridLayout>
 
 </LinearLayout>
