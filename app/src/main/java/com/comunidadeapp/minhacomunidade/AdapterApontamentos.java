@@ -66,6 +66,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
 
         // 3. Get the two text view from the rowView
         TextView Descricao = (TextView) rowView.findViewById(R.id.txtDescricao);
+        TextView Cidade = (TextView) rowView.findViewById(R.id.txtCidade);
         TextView Usuario = (TextView) rowView.findViewById(R.id.txtUsuario);
         TextView Data = (TextView) rowView.findViewById(R.id.txtData);
         ImageView foto = (ImageView) rowView.findViewById(R.id.imageView3);
@@ -75,6 +76,8 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
 
         // 4. Set the text for textView
         Descricao.setText(itemsArrayList.get(position).Descricao);
+        Cidade.setText(itemsArrayList.get(position).Cidade);
+
         Usuario.setText(itemsArrayList.get(position).Responsavel.nome);
         if (itemsArrayList.get(position).Data != null) {
             DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
@@ -85,7 +88,7 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         }
         if(itemsArrayList.get(position).Foto != null){
             foto.setImageBitmap(itemsArrayList.get(position).Foto);
-            foto.setAlpha((float) 1);
+            foto.setAlpha((float) 0.7);
         }
         else{
             foto.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.city_background_blur));

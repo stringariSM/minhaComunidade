@@ -3,6 +3,11 @@ package com.comunidadeapp.minhacomunidade;
 
 import android.app.ActivityOptions;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Build;
@@ -35,6 +40,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +49,7 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class NovoApontamento extends Fragment {
@@ -56,7 +63,11 @@ public class NovoApontamento extends Fragment {
     ArrayList<String> lstTipoApontamento = new ArrayList<>();
     ArrayAdapter<String> adapterTipoApontamento;
     String UrlFoto;
+    String Cidade;
+    double Latitude;
+    double Longitude;
     int ID = 0;
+    GPSTracker gps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +78,43 @@ public class NovoApontamento extends Fragment {
         edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
         Bundle args = getArguments();
         UrlFoto  = args.getString("URLFOTO");
+        Cidade = "";
+        Latitude = 0;
+        Longitude = 0;
+        //Localização
+        // create class object
+        gps = new GPSTracker(getActivity().getApplicationContext());
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            Latitude = latitude;
+            Longitude = longitude;
+
+            Geocoder geocoder = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //String cityName = addresses.get(0).getAddressLine(0);
+            String stateName = addresses.get(0).getAddressLine(1);
+            //String countryName = addresses.get(0).getAddressLine(2);
+            // \n is for new line
+            //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nCity: " +cityName+"\nState: " + stateName + "\nCountry: " + countryName + "\nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            Cidade = stateName;
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
+
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +196,9 @@ public class NovoApontamento extends Fragment {
         apontamento.Data = Calendar.getInstance().getTime();
         apontamento.Responsavel = user;
         apontamento.UrlFoto = UrlFoto;
+        apontamento.Cidade = Cidade;
+        apontamento.Latitude = Latitude;
+        apontamento.Longitude = Longitude;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("Apontamentos").push().setValue(apontamento, new DatabaseReference.CompletionListener() {
             @Override

@@ -17,14 +17,20 @@ public class Apontamento {
     public String UrlFoto;
     public Bitmap Foto;
     public String resolvido = "false";
+    public String Cidade;
+    public double Latitude;
+    public double Longitude;
 
     public Apontamento(){}
 
-    public Apontamento(String Descricao, Date Data, TipoApontamento Tipo, Usuario Responsavel, String UrlFoto){
+    public Apontamento(String Descricao, Date Data, TipoApontamento Tipo, Usuario Responsavel, String UrlFoto, String Cidade, double Latitude, double Longitude){
         this.Descricao = Descricao;
         this.Data = Data;
         this.Tipo = Tipo;
         this.Responsavel = Responsavel;
         this.UrlFoto = UrlFoto;
+        this.Cidade = Cidade;
+        this.Latitude = Latitude;
+        this.Longitude = Longitude;
     }
 }
