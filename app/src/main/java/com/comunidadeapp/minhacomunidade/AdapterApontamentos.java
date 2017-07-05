@@ -2,6 +2,7 @@ package com.comunidadeapp.minhacomunidade;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -77,6 +78,16 @@ public class AdapterApontamentos extends ArrayAdapter<Apontamento> {
         // 4. Set the text for textView
         Descricao.setText(itemsArrayList.get(position).Descricao);
         Cidade.setText(itemsArrayList.get(position).Cidade);
+
+        Cidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), MapsActivity.class);
+                i.putExtra("Longitude", itemsArrayList.get(position).Longitude);
+                i.putExtra("Latitude", itemsArrayList.get(position).Latitude);
+                context.startActivity(i);
+            }
+        });
 
         Usuario.setText(itemsArrayList.get(position).Responsavel.nome);
         if (itemsArrayList.get(position).Data != null) {

@@ -73,6 +73,8 @@ public class NovoApontamento extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novo_apontamento, container, false);
 
+        getActivity().overridePendingTransition(R.anim.left_go_in, R.anim.left_go_out);
+
         sp = (Spinner) view.findViewById(R.id.spApontamentoTipo);
         btnSalvar = (Button) view.findViewById(R.id.btnSalvaApontamento);
         edtDescricao = (EditText) view.findViewById(R.id.edtApontamentoDescricao);
@@ -215,4 +217,5 @@ public class NovoApontamento extends Fragment {
             }
         });
     }
+
 }

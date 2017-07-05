@@ -30,6 +30,7 @@
     <string name="titulo_alerta_configuracao">Configurações de GPS</string>
     <string name="configuracoes">Configurações</string>
     <string name="cancelar">Cancelar</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

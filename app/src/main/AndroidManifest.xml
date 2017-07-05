@@ -62,7 +62,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/paths"></meta-data>
         </provider>
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBH6yxkFhSNoh4xlebNmdVEe3FQ0YqIuOs"/>
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name="com.comunidadeapp.minhacomunidade.MapsActivity" android:label="@string/title_activity_maps">
+
+        </activity>
     </application>
 
 </manifest>
